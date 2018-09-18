@@ -5,7 +5,8 @@
     "start": "./node_modules/.bin/nodemon bin/run",
     "koa": "./node_modules/.bin/runkoa bin/www",
     "pm2": "pm2 start bin/run ",
-    "test": "./node_modules/.bin/mocha -u bdd"
+    "test": "./node_modules/.bin/mocha -u bdd",
+    "initdb": "npm install && node tools/initdb.js"
   },
   "dependencies": {
     "co": "^4.6.0",
