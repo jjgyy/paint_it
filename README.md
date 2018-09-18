@@ -1,7 +1,7 @@
-#paint it
+# paint it
 
-##paint it client
+## paint it client
 AngularJs + BootStrap
 
-##paint it server
+## paint it server
 Node.js Koa.js + Knex.js
