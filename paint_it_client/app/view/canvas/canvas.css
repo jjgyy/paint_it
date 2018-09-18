@@ -1,0 +1,26 @@
+a {
+    cursor: pointer;
+}
+
+#topElement{
+    -moz-user-select:-moz-none;
+    overflow: auto;
+}
+
+.canvas{
+    position: absolute;
+    display: block;
+    cursor: auto;
+    border: 1px solid #CCCCCC;
+}
+
+#drawCanvas{
+    background: rgba(255,255,255,0);
+    z-index: -1;
+    cursor: pointer;
+}
+
+#netBackground{
+    background: rgba(255,255,255,1);
+    z-index: -4;
+}
