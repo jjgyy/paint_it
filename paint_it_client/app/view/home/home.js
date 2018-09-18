@@ -1,7 +1,7 @@
 /**
- * @Description: 
+ * @Description:
  * @author Young Gu
- * @date 2018/9/18 
+ * @date 2018/9/18
 */
 
 angular.module('myApp.home', [

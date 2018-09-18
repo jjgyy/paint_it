@@ -10,19 +10,25 @@ angular.module('myApp', [
   'ngRoute',
   'ui.router',
   'myApp.login',
+  'myApp.register',
   'myApp.home',
   'myApp.canvas'
 ])
 
 
     .config(function($stateProvider, $urlRouterProvider){
-      $urlRouterProvider.when('', '/canvas');
+      $urlRouterProvider.when('', '/login');
 
       $stateProvider
           .state('login', {
             url: '/login',
             templateUrl: 'view/login/login.html',
             controller: 'LoginCtrl'
+          })
+          .state('register', {
+              url: '/register',
+              templateUrl: 'view/register/register.html',
+              controller: 'RegisterCtrl'
           })
           .state('home', {
             url: '/home',
@@ -38,5 +44,5 @@ angular.module('myApp', [
 
 
     .controller('MainCtrl', function($scope, $http, $state, $window){
-
+        $scope.logged = false;
     });

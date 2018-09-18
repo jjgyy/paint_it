@@ -1,0 +1,18 @@
+
+/*
+上下留白
+ */
+.column_padding_sm{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.column_padding_md{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.column_padding_lg{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}

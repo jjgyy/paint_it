@@ -13,5 +13,7 @@ angular.module('myApp.login', [
     })
 
     .controller('LoginCtrl',function($scope, $route, $http, $state) {
+        $scope.login = function () {
 
+        };
     });
