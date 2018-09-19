@@ -47,4 +47,18 @@ angular.module('myApp', [
 
     .controller('MainCtrl', function($scope, $http, $state, $window){
         $scope.logged = false;
-    });
+    })
+
+
+    .directive('onFinishRender',['$timeout', '$parse', function ($timeout, $parse) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attr) {
+                if (scope.$last === true) {
+                    $timeout(function () {
+                        scope.$emit('ngRepeatFinished'); //事件通知
+                    });
+                }
+            }
+        }
+    }]);

@@ -5,7 +5,9 @@
 
                 <div ng-click="newCanvas()" class="cell add_btn"></div>
 
-                <div ui-sref="canvas({canvas_id: item.canvas_id})" ng-repeat="item in canvasList" class="cell"></div>
+                <div ui-sref="canvas({canvas_id: item.canvas_id})" ng-repeat="item in canvasList" class="cell" on-finish-render="">
+                    <canvas id="{{item.canvas_id}}"></canvas>
+                </div>
 
             </div>
         </div>

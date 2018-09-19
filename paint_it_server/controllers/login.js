@@ -2,7 +2,7 @@ const mysql = require('../middleware/mysql');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
-module.exports = async (ctx, next) => {
+module.exports = async (ctx) => {
 
     const username = ctx.query.username,
           password = ctx.query.password;

@@ -42,6 +42,11 @@ angular.module('myApp.canvas.canvas_object', [
                 this.dom.height = canvasObject.dom.height;
             };
 
+            canvas.zoom = function (widthRatio, heightRatio) {
+                heightRatio = (heightRatio === undefined) ? widthRatio : heightRatio;
+                this.context.scale(widthRatio, heightRatio);
+            };
+
             return canvas;
         };
 
@@ -116,7 +121,6 @@ angular.module('myApp.canvas.canvas_object', [
                 if ( !Array.isArray(trailRecord) ) {return;}
 
                 this.context.beginPath();
-                console.log(trailRecord);
                 for (let i=0, trailNum=trailRecord.length; i<trailNum; i++){
                     this.context.moveTo(trailRecord[i][0].x, trailRecord[i][0].y);
                     for (let j=1, length=trailRecord[i].length; j<length; j++){
@@ -132,6 +136,7 @@ angular.module('myApp.canvas.canvas_object', [
             drawCanvas.identifyShape = function () {
                 return identify_shape.mergeTrail(this.scope.trailRecord);
             };
+
 
             drawCanvas.dom.onmousedown = function () {
                 drawCanvas.scope.isDrawing = true;

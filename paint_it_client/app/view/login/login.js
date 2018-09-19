@@ -25,7 +25,6 @@ angular.module('myApp.login', [
             }).then(function (res) {
                 if (res.data.code === 1) {
                     $cookies.put('token', res.data.token);
-                    console.log(res);
                     $state.go('home');
                 } else {
                     console.log(res);

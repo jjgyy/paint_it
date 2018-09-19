@@ -22,7 +22,7 @@ angular.module('myApp.register', [
                     password: $scope.password
                 }
             }).then(function (res) {
-                console.log(res);
+                $state.go('login')
             }, function () {
                 console.error();
             });

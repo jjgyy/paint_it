@@ -22,7 +22,7 @@ angular.module('myApp.canvas', [
 
         //生成画板
         let drawCanvas = canvas_object.DrawCanvas(document.getElementById("drawCanvas"), $scope);
-        drawCanvas.setLocationAndSize(100, 100, 1000, 600);
+        drawCanvas.setLocationAndSize(100, 100, 1000, 1000);
 
         //生成网格背景
         let netBackground = canvas_object.NetBackground(document.getElementById("netBackground"));
@@ -57,7 +57,7 @@ angular.module('myApp.canvas', [
                 },
                 headers: {'authorization': 'Bearer ' + $cookies.get('token')}
             }).then(function (res) {
-                console.log(res);
+
             }, function () {
                 console.error();
             });
@@ -72,7 +72,6 @@ angular.module('myApp.canvas', [
                 },
                 headers: {'authorization': 'Bearer ' + $cookies.get('token')}
             }).then(function (res) {
-                console.log(res);
                 $state.go('home');
             }, function () {
                 console.error();
