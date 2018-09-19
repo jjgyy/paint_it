@@ -1,7 +1,3 @@
-a {
-    cursor: pointer;
-}
-
 #topElement{
     -moz-user-select:-moz-none;
     overflow: auto;

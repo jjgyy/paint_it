@@ -1,24 +1,33 @@
 const mysql = require('../middleware/mysql');
+const token_verify = require('../middleware/token_verify');
 
 module.exports = async (ctx) => {
 
-    const username = ctx.query.username,
-        password = ctx.query.password;
+    const token = ctx.header.authorization;
+    let payload = await token_verify(token);
 
-    try {
-
-        ctx.body = await mysql('user_canvas')
+    if (token) {
+        // 解密，获取payload
+        let canvas_id = await mysql('canvases')
             .insert({
-                username: username,
-                password: password
+                trail_record: ''
             })
-            .returning('id');
-    } catch (e) {
-        ctx.state = {
-            code: -1,
-            data: {
-                msg: e.sqlMessage  //数据库报错信息
-            }
+            .returning('canvas_id');
+
+        await mysql('user_canvas')
+            .insert({
+                user_id: payload.user_id,
+                canvas_id: canvas_id[0]
+            });
+
+        ctx.body = {
+            canvas_id: canvas_id[0]
+        }
+
+    } else {
+        ctx.body = {
+            message: ctx,
+            code: -1
         }
     }
 

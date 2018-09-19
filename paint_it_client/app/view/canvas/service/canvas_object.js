@@ -1,7 +1,7 @@
 /**
- * @Description: 
+ * @Description:
  * @author Young Gu
- * @date 2018/9/16 
+ * @date 2018/9/16
 */
 
 angular.module('myApp.canvas.canvas_object', [
@@ -85,12 +85,14 @@ angular.module('myApp.canvas.canvas_object', [
             (() => {
                 rootScope.$drawCanvas = {
                     isDrawing: false,
-                    strokeCount: 0,
-                    lastTrail: [],
-                    trailRecord: []
+                    strokeCount: 0
                 };
                 drawCanvas.scope = rootScope.$drawCanvas;
             })();
+
+            drawCanvas.lastTrail = [];
+
+            drawCanvas.trailRecord = [];
 
             drawCanvas.clearStrokeCount = function () {
                 this.scope.strokeCount = 0;
@@ -106,6 +108,27 @@ angular.module('myApp.canvas.canvas_object', [
                 this.context.clearRect(0, 0, this.dom.width, this.dom.height);
             };
 
+
+            drawCanvas.loadTrailRecord = function (trailRecord) {
+                //将转化的职责交给此方法
+                if ( (typeof trailRecord) !== 'object' && (typeof trailRecord) !== 'string') {return;}
+                if ( (typeof trailRecord) === 'string' ) {trailRecord = eval(trailRecord);}
+                if ( !Array.isArray(trailRecord) ) {return;}
+
+                this.context.beginPath();
+                console.log(trailRecord);
+                for (let i=0, trailNum=trailRecord.length; i<trailNum; i++){
+                    this.context.moveTo(trailRecord[i][0].x, trailRecord[i][0].y);
+                    for (let j=1, length=trailRecord[i].length; j<length; j++){
+                        this.context.lineTo(trailRecord[i][j].x, trailRecord[i][j].y);
+                    }
+                }
+                this.context.stroke();
+
+                this.trailRecord = trailRecord;
+            };
+
+
             drawCanvas.identifyShape = function () {
                 return identify_shape.mergeTrail(this.scope.trailRecord);
             };
@@ -118,20 +141,22 @@ angular.module('myApp.canvas.canvas_object', [
                     window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
                 );
                 //最后一笔的轨迹清空
-                drawCanvas.scope.lastTrail = [];
-                drawCanvas.scope.lastTrail.push({
+                drawCanvas.lastTrail = [];
+                drawCanvas.lastTrail.push({
                     x: window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
                     y: window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
                 });
             };
 
             drawCanvas.dom.onmousemove = function () {
-                if(!drawCanvas.scope.isDrawing) return;
+                if(!drawCanvas.scope.isDrawing) {
+                    return;
+                }
                 drawCanvas.context.lineTo(
                     window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
                     window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
                 );
-                drawCanvas.scope.lastTrail.push({
+                drawCanvas.lastTrail.push({
                     x: window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
                     y: window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
                 });
@@ -143,7 +168,7 @@ angular.module('myApp.canvas.canvas_object', [
                 //笔画数+1
                 drawCanvas.scope.strokeCount ++;
                 //最后一笔的轨迹进入轨迹记录队列
-                drawCanvas.scope.trailRecord.push(drawCanvas.scope.lastTrail);
+                drawCanvas.trailRecord.push(drawCanvas.lastTrail);
                 drawCanvas.context.stroke();
             };
 

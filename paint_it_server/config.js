@@ -11,8 +11,7 @@ const CONF = {
         secret: 'jwt demo',
         path: [
             /^\/login/,
-            /^\/addUser/,
-            /^\/getUserInfo/
+            /^\/addUser/
         ]
     }
 };

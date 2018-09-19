@@ -1,3 +1,4 @@
+const mysql = require('../middleware/mysql');
 const token_verify = require('../middleware/token_verify');
 
 module.exports = async (ctx) => {
@@ -5,11 +6,13 @@ module.exports = async (ctx) => {
     const token = ctx.header.authorization;
 
     if (token) {
-        // 解密，获取payload
+
         let payload = await token_verify(token);
-        ctx.body = {
-            user_info: payload
-        }
+
+        ctx.body = await mysql('user_canvas').select('*').where({
+            user_id: payload.user_id
+        });
+
     } else {
         ctx.body = {
             message: ctx,

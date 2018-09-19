@@ -12,7 +12,10 @@ angular.module('myApp.canvas', [
 
     })
 
-    .controller('CanvasCtrl',function($scope, $route, $http, $state, canvas_object) {
+    .controller('CanvasCtrl',function($scope, $route, $http, $state, $cookies, $stateParams, canvas_object) {
+
+        $scope.canvas_id = $stateParams.canvas_id;
+
         //DOM对象化
         let topElement = document.getElementById("topElement");
 
@@ -26,20 +29,54 @@ angular.module('myApp.canvas', [
         netBackground.imitate(drawCanvas);
         netBackground.generateNet();
 
-
-        $scope.log = function () {
-          console.log($scope);
-          console.log(drawCanvas.identifyShape());
-        };
-
+        //加载云端画板内容
         $http({
             method: 'get',
-            url: host + 'users',
-            withCredentials: true
+            url: host + 'getCanvas',
+            params: {
+                canvas_id: $scope.canvas_id
+            },
+            headers: {'authorization': 'Bearer ' + $cookies.get('token')}
         }).then(function (res) {
-            console.log(res);
+            drawCanvas.loadTrailRecord(res.data[0].trail_record);
         }, function () {
             console.error();
         });
+
+
+        $scope.log = function () {
+        };
+
+        $scope.save = function () {
+            $http({
+                method: 'get',
+                url: host + 'updateCanvas',
+                params: {
+                    canvas_id: $scope.canvas_id,
+                    trail_record: JSON.stringify(drawCanvas.trailRecord)
+                },
+                headers: {'authorization': 'Bearer ' + $cookies.get('token')}
+            }).then(function (res) {
+                console.log(res);
+            }, function () {
+                console.error();
+            });
+        };
+
+        $scope.delete = function () {
+            $http({
+                method: 'get',
+                url: host + 'deleteCanvas',
+                params: {
+                    canvas_id: $scope.canvas_id
+                },
+                headers: {'authorization': 'Bearer ' + $cookies.get('token')}
+            }).then(function (res) {
+                console.log(res);
+                $state.go('home');
+            }, function () {
+                console.error();
+            });
+        };
 
     });

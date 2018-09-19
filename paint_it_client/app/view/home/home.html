@@ -2,10 +2,11 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="cell_container">
+
                 <div ng-click="newCanvas()" class="cell add_btn"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
-                <div class="cell"></div>
+
+                <div ui-sref="canvas({canvas_id: item.canvas_id})" ng-repeat="item in canvasList" class="cell"></div>
+
             </div>
         </div>
     </div>

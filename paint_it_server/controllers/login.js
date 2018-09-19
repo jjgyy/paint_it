@@ -12,9 +12,6 @@ module.exports = async (ctx, next) => {
         password: password
     })
         .then(res => {
-            ctx.body = {
-                message: res
-            };
             if(res[0].user_id) {
                 let userToken = {
                     user_id: res[0].user_id,

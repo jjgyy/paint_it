@@ -18,29 +18,30 @@ angular.module('myApp', [
 
 
     .config(function($stateProvider, $urlRouterProvider){
-      $urlRouterProvider.when('', '/login');
+        $urlRouterProvider.when('', '/login');
 
-      $stateProvider
-          .state('login', {
-            url: '/login',
-            templateUrl: 'view/login/login.html',
-            controller: 'LoginCtrl'
-          })
-          .state('register', {
-              url: '/register',
-              templateUrl: 'view/register/register.html',
-              controller: 'RegisterCtrl'
-          })
-          .state('home', {
-            url: '/home',
-            templateUrl: 'view/home/home.html',
-            controller: 'HomeCtrl'
-          })
-          .state('canvas', {
-            url: '/canvas',
-            templateUrl: 'view/canvas/canvas.html',
-            controller: 'CanvasCtrl'
-          });
+        $stateProvider
+            .state('login', {
+                url: '/login',
+                templateUrl: 'view/login/login.html',
+                controller: 'LoginCtrl'
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: 'view/register/register.html',
+                controller: 'RegisterCtrl'
+            })
+            .state('home', {
+                url: '/home',
+                templateUrl: 'view/home/home.html',
+                controller: 'HomeCtrl'
+            })
+            .state('canvas', {
+                params:{"canvas_id": null},
+                url: '/canvas/?:canvas_id',
+                templateUrl: 'view/canvas/canvas.html',
+                controller: 'CanvasCtrl'
+            });
     })
 
 
