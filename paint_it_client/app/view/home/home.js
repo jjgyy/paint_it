@@ -12,17 +12,22 @@ angular.module('myApp.home', [
 
     })
 
-    .controller('HomeCtrl',function($scope, $route, $http, $state) {
+    .controller('HomeCtrl',function($scope, $route, $http, $state, $cookies) {
 
         $http({
             method: 'get',
             url: host + 'getUserInfo',
-            headers: {'authorization': 'Bearer ' + token}
+            headers: {'authorization': 'Bearer ' + $cookies.get('token')}
         }).then(function (res) {
             console.log(res);
         }, function () {
             console.error();
         });
+
+
+        $scope.newCanvas = function () {
+
+        }
 
 
     });

@@ -20,22 +20,22 @@ a{
 }
 
 .cell_container{
-    position: relative;
-    float: left;
-    left: 50%;
+
 }
 .cell{
     position: relative;
-    display: flex;
-    flex-direction: column;
     float: left;
-    left: -50%;
     width: 200px;
     height: 200px;
     padding: 10px;
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+    background: whitesmoke center no-repeat;
+    cursor: pointer;
+}
+.cell:hover{
+    background-color: #ebebeb;
 }
 
 

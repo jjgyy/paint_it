@@ -10,4 +10,7 @@ router.get('/addUser', controllers.addUser);
 
 router.get('/getUserInfo', controllers.getUserInfo);
 
+
+router.get('/addCanvas', controllers.addCanvas);
+
 module.exports = router;

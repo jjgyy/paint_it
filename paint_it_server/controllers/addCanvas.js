@@ -3,16 +3,16 @@ const mysql = require('../middleware/mysql');
 module.exports = async (ctx) => {
 
     const username = ctx.query.username,
-          password = ctx.query.password;
+        password = ctx.query.password;
 
     try {
 
-        ctx.body = await mysql('users')
+        ctx.body = await mysql('user_canvas')
             .insert({
                 username: username,
                 password: password
             })
-            .returning('user_id');
+            .returning('id');
     } catch (e) {
         ctx.state = {
             code: -1,

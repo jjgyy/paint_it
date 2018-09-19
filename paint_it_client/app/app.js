@@ -9,6 +9,7 @@ const host = 'http://localhost:3000/';
 angular.module('myApp', [
   'ngRoute',
   'ui.router',
+  'ngCookies',
   'myApp.login',
   'myApp.register',
   'myApp.home',

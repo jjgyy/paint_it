@@ -12,7 +12,7 @@ angular.module('myApp.login', [
 
     })
 
-    .controller('LoginCtrl',function($scope, $route, $http, $state) {
+    .controller('LoginCtrl',function($scope, $route, $http, $state, $cookies) {
 
         $scope.login = function () {
             $http({
@@ -24,7 +24,7 @@ angular.module('myApp.login', [
                 }
             }).then(function (res) {
                 if (res.data.code === 1) {
-                    token = res.data.token;
+                    $cookies.put('token', res.data.token);
                     console.log(res);
                     $state.go('home');
                 } else {
