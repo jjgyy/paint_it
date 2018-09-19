@@ -17,7 +17,6 @@ angular.module('myApp.register', [
             $http({
                 method: 'get',
                 url: host + 'addUser',
-                withCredentials: true,
                 params: {
                     username: $scope.username,
                     password: $scope.password

@@ -1,4 +1,6 @@
-
+a{
+    cursor: pointer;
+}
 /*
 上下留白
  */
@@ -15,4 +17,28 @@
 .column_padding_lg{
     padding-top: 7px;
     padding-bottom: 7px;
+}
+
+.cell_container{
+    position: relative;
+    float: left;
+    left: 50%;
+}
+.cell{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    left: -50%;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.white_smoke{
+    background: whitesmoke;
 }

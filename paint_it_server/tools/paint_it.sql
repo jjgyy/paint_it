@@ -7,6 +7,7 @@ CREATE TABLE `users` (
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
+  UNIQUE KEY (`username`),
   KEY `id` (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 

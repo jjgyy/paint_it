@@ -13,7 +13,27 @@ angular.module('myApp.login', [
     })
 
     .controller('LoginCtrl',function($scope, $route, $http, $state) {
-        $scope.login = function () {
 
+        $scope.login = function () {
+            $http({
+                method: 'get',
+                url: host + 'login',
+                params: {
+                    username: $scope.username,
+                    password: $scope.password
+                }
+            }).then(function (res) {
+                if (res.data.code === 1) {
+                    token = res.data.token;
+                    console.log(res);
+                    $state.go('home');
+                } else {
+                    console.log(res);
+                }
+            }, function () {
+                console.error();
+            });
         };
+
+
     });
