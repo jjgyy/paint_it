@@ -6,13 +6,21 @@
 
 angular.module('myApp.canvas.identify_shape', [
 ])
+    .service('identify_border', function () {
+
+        const service = this;
+
+        service.getBorder = function () {
+
+        };
+    })
+
     .service('identify_shape', function() {
         const service = this;
 
         let calDistancePow = function (a, b) {
             return Math.pow((a.x - b.x), 2) + Math.pow((a.y - b.y), 2);
         };
-
 
         let reverseList = function (list) {
             let result = [];
@@ -63,6 +71,7 @@ angular.module('myApp.canvas.identify_shape', [
             }
             return mergedTrail;
         };
+
 
         service.identify = function () {
 

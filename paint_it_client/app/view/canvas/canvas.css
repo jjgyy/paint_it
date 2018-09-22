@@ -1,22 +1,27 @@
-#topElement{
-    -moz-user-select:-moz-none;
-    overflow: auto;
+#canvasContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    background: whitesmoke;
 }
 
-.canvas{
+.canvas {
     position: absolute;
     display: block;
     cursor: auto;
     border: 1px solid #CCCCCC;
+    margin-bottom: 100px;
 }
 
-#drawCanvas{
+#drawCanvas {
     background: rgba(255,255,255,0);
-    z-index: -1;
+    z-index: 2;
     cursor: pointer;
 }
 
-#netBackground{
+#netBackground {
     background: rgba(255,255,255,1);
-    z-index: -4;
+    z-index: 1;
 }

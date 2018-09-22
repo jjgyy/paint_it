@@ -2,18 +2,21 @@
  * @Description:
  * @author Young Gu
  * @date 2018/9/15
-*/
+ */
 
 const host = 'http://localhost:3000/';
 
 angular.module('myApp', [
-  'ngRoute',
-  'ui.router',
-  'ngCookies',
-  'myApp.login',
-  'myApp.register',
-  'myApp.home',
-  'myApp.canvas'
+    'ngRoute',
+    'ui.router',
+    'ngCookies',
+
+    'myApp.login',
+    'myApp.register',
+    'myApp.home',
+    'myApp.canvas',
+
+    'myApp.serviceRouter',
 ])
 
 

@@ -4,11 +4,14 @@
  * @date 2018/9/16
 */
 
-angular.module('myApp.canvas.canvas_object', [
-    'myApp.canvas.identify_shape'
-])
-    .service('canvas_object', function(identify_shape) {
+angular.module('myApp.dom_object.canvas_object', [])
+
+    .service('canvas_object', function(trail_object) {
+
         const service = this;
+
+
+
 
         /**
          * Canvas
@@ -50,6 +53,9 @@ angular.module('myApp.canvas.canvas_object', [
             return canvas;
         };
 
+
+
+
         /**
          * extend Canvas
          * @param dom
@@ -78,6 +84,9 @@ angular.module('myApp.canvas.canvas_object', [
             return netBackground;
         };
 
+
+
+
         /**
          * extend Canvas
          * @param dom
@@ -86,6 +95,9 @@ angular.module('myApp.canvas.canvas_object', [
          */
         service.DrawCanvas = function (dom, rootScope) {
             let drawCanvas = service.Canvas(dom);
+            drawCanvas.lastTrail = [];
+            drawCanvas.trailRecord = [];
+            drawCanvas.trailRecordNeedingIdentify = [];
 
             (() => {
                 rootScope.$drawCanvas = {
@@ -95,16 +107,24 @@ angular.module('myApp.canvas.canvas_object', [
                 drawCanvas.scope = rootScope.$drawCanvas;
             })();
 
-            drawCanvas.lastTrail = [];
-
-            drawCanvas.trailRecord = [];
+            drawCanvas.getIdentifiedTrail = function () {
+                return (this.trailRecordNeedingIdentify !== []) ? trail_object.Trail(this.trailRecordNeedingIdentify) : null;
+            };
 
             drawCanvas.clearStrokeCount = function () {
                 this.scope.strokeCount = 0;
             };
 
+            drawCanvas.clearLastTrail = function () {
+                this.lastTrail = [];
+            };
+
             drawCanvas.clearTrailRecord = function () {
-                this.scope.trailRecord = [];
+                this.trailRecord = [];
+            };
+
+            drawCanvas.clearTrailRecordNeedingIdentify = function () {
+                this.trailRecordNeedingIdentify = [];
             };
 
             drawCanvas.clearCanvas = function () {
@@ -113,6 +133,12 @@ angular.module('myApp.canvas.canvas_object', [
                 this.context.clearRect(0, 0, this.dom.width, this.dom.height);
             };
 
+            drawCanvas.clear = function () {
+                this.clearStrokeCount();
+                this.clearTrailRecord();
+                this.clearTrailRecordNeedingIdentify();
+                this.clearCanvas();
+            };
 
             drawCanvas.loadTrailRecord = function (trailRecord) {
                 //将转化的职责交给此方法
@@ -133,11 +159,6 @@ angular.module('myApp.canvas.canvas_object', [
             };
 
 
-            drawCanvas.identifyShape = function () {
-                return identify_shape.mergeTrail(this.scope.trailRecord);
-            };
-
-
             drawCanvas.dom.onmousedown = function () {
                 drawCanvas.scope.isDrawing = true;
                 drawCanvas.context.beginPath();
@@ -154,9 +175,8 @@ angular.module('myApp.canvas.canvas_object', [
             };
 
             drawCanvas.dom.onmousemove = function () {
-                if(!drawCanvas.scope.isDrawing) {
-                    return;
-                }
+                if(!drawCanvas.scope.isDrawing) { return; }
+                drawCanvas.context.stroke();
                 drawCanvas.context.lineTo(
                     window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
                     window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
@@ -165,20 +185,22 @@ angular.module('myApp.canvas.canvas_object', [
                     x: window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
                     y: window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
                 });
-                drawCanvas.context.stroke();
             };
 
             drawCanvas.dom.onmouseup = function () {
                 drawCanvas.scope.isDrawing = false;
+                drawCanvas.context.stroke();
                 //笔画数+1
                 drawCanvas.scope.strokeCount ++;
                 //最后一笔的轨迹进入轨迹记录队列
                 drawCanvas.trailRecord.push(drawCanvas.lastTrail);
-                drawCanvas.context.stroke();
+                drawCanvas.trailRecordNeedingIdentify.push(drawCanvas.lastTrail);
             };
 
             return drawCanvas;
         };
+
+
 
 
     });

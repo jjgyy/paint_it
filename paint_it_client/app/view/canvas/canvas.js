@@ -4,9 +4,7 @@
  * @date 2018/9/16
 */
 
-angular.module('myApp.canvas', [
-    'myApp.canvas.canvas_object'
-])
+angular.module('myApp.canvas', [])
 
     .config(function($stateProvider, $urlRouterProvider){
 
@@ -22,7 +20,7 @@ angular.module('myApp.canvas', [
 
         //生成画板
         let drawCanvas = canvas_object.DrawCanvas(document.getElementById("drawCanvas"), $scope);
-        drawCanvas.setLocationAndSize(100, 100, 1000, 1000);
+        drawCanvas.setLocationAndSize(300, 100, 1000, 1000);
 
         //生成网格背景
         let netBackground = canvas_object.NetBackground(document.getElementById("netBackground"));
@@ -45,6 +43,10 @@ angular.module('myApp.canvas', [
 
 
         $scope.log = function () {
+            console.log(drawCanvas.getIdentifiedTrail().getLeftBorder());
+            console.log(drawCanvas.getIdentifiedTrail().getRightBorder());
+            console.log(drawCanvas.getIdentifiedTrail().getTopBorder());
+            console.log(drawCanvas.getIdentifiedTrail().getBottomBorder());
         };
 
         $scope.save = function () {
