@@ -23,8 +23,8 @@ angular.module('myApp.dom_object.canvas_object', [])
             canvas.context = canvas.dom.getContext('2d');
 
             canvas.setSize = function (width, height) {
-                this.dom.width = width;
-                this.dom.height = height;
+                this.dom.width = parseFloat(width);
+                this.dom.height = parseFloat(height);
             };
 
             canvas.setLocation = function (x, y) {
@@ -35,6 +35,14 @@ angular.module('myApp.dom_object.canvas_object', [])
             canvas.setLocationAndSize = function (x, y, width, height) {
                 this.setLocation(x, y);
                 this.setSize(width, height);
+            };
+
+            canvas.getLeftBorder = function () {
+                return parseFloat(this.dom.style.left);
+            };
+
+            canvas.getTopBorder = function () {
+                return parseFloat(this.dom.style.top);
             };
 
             //模仿另一个canvasObject的位置与尺寸

@@ -10,7 +10,7 @@ angular.module('myApp.canvas', [])
 
     })
 
-    .controller('CanvasCtrl',function($scope, $route, $http, $state, $cookies, $stateParams, canvas_object) {
+    .controller('CanvasCtrl',function($scope, $route, $http, $state, $cookies, $stateParams, canvas_object, cover_object) {
 
         $scope.canvas_id = $stateParams.canvas_id;
 
@@ -43,10 +43,29 @@ angular.module('myApp.canvas', [])
 
 
         $scope.log = function () {
-            console.log(drawCanvas.getIdentifiedTrail().getLeftBorder());
-            console.log(drawCanvas.getIdentifiedTrail().getRightBorder());
-            console.log(drawCanvas.getIdentifiedTrail().getTopBorder());
-            console.log(drawCanvas.getIdentifiedTrail().getBottomBorder());
+            console.log(drawCanvas.getIdentifiedTrail().getShape().getCenter());
+            drawCanvas.getIdentifiedTrail().getShape().getAngleNumber();
+        };
+
+        $scope.cover = function () {
+            //页面上创建dom
+            let cover_dom = document.createElement('div');
+            document.getElementById("coverContainer").appendChild(cover_dom);
+
+            //覆盖需要识别的区域
+            (() => {
+                let cover = cover_object.Cover(cover_dom);
+                let trail = drawCanvas.getIdentifiedTrail();
+                cover.setLocationAndSize(
+                    drawCanvas.getLeftBorder() + trail.getLeftBorder(),
+                    drawCanvas.getTopBorder() + trail.getTopBorder(),
+                    trail.getWidth(),
+                    trail.getHeight()
+                );
+                cover.setInnerText(trail.getShape().getName());
+                drawCanvas.clearTrailRecordNeedingIdentify();
+            })();
+
         };
 
         $scope.save = function () {
