@@ -11,14 +11,42 @@ angular.module('myApp.model_object.shape_object', [])
         const service = this;
 
         service.Shape = function (trail) {
-            console.log(trail);
             let shape = {};
             shape.trail = trail;
             shape.name = '形状';
 
+
+
             shape.getName = function () {
-                return this.name;
+                let angleNum = this.getAngleNumber(),
+                    width = this.getWidth(),
+                    height = this.getHeight();
+                let WHRatio = width / height;
+                if (angleNum <= 1) {
+                    return '直线';
+                }
+                if (1.5 <= angleNum && angleNum <= 2) {
+                    return '圆形';
+                }
+                if (2.5 <= angleNum && angleNum <= 3) {
+                    return '三角形';
+                }
+                if (3.5 <= angleNum && angleNum <= 4) {
+                    if (WHRatio >= 0.8 && WHRatio <=1.25) {
+                        return '正方形';
+                    } else {
+                        return '长方形';
+                    }
+                }
+                if (4.5 <= angleNum && angleNum <= 5) {
+                    return '五边形';
+                }
+
+                return '多边形';
+
             };
+
+
 
             shape.getLeftBorder = function () {
                 let leftest = this.trail[0].x;
@@ -28,6 +56,8 @@ angular.module('myApp.model_object.shape_object', [])
                 return leftest;
             };
 
+
+
             shape.getRightBorder = function () {
                 let rightest = this.trail[0].x;
                 for (let i=0, len=this.trail.length; i<len; i++) {
@@ -35,6 +65,8 @@ angular.module('myApp.model_object.shape_object', [])
                 }
                 return rightest;
             };
+
+
 
             shape.getBottomBorder = function () {
                 let bottomest = this.trail[0].y;
@@ -44,6 +76,8 @@ angular.module('myApp.model_object.shape_object', [])
                 return bottomest;
             };
 
+
+
             shape.getTopBorder = function () {
                 let toppest = this.trail[0].y;
                 for (let i=0, len=this.trail.length; i<len; i++) {
@@ -52,12 +86,28 @@ angular.module('myApp.model_object.shape_object', [])
                 return toppest;
             };
 
+
+
+            shape.getWidth = function () {
+                return this.getRightBorder() - this.getLeftBorder();
+            };
+
+
+
+            shape.getHeight = function () {
+                return this.getBottomBorder() - this.getTopBorder();
+            };
+
+
+
             shape.getCenter = function () {
                 let center = {};
                 center.x = ( this.getLeftBorder() + this.getRightBorder() ) / 2;
                 center.y = ( this.getTopBorder() + this.getBottomBorder() ) / 2;
                 return center;
             };
+
+
 
             shape.getAngleNumber = function () {
                 let trail = this.trail,
@@ -99,10 +149,12 @@ angular.module('myApp.model_object.shape_object', [])
                         }
                     }
                 }
+                console.log(trendChangeCount/2);
 
-                console.log(trendChangeCount);
-
+                return trendChangeCount/2;
             };
+
+
 
             return shape;
         };

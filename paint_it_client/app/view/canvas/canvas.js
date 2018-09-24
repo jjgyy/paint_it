@@ -14,10 +14,6 @@ angular.module('myApp.canvas', [])
 
         $scope.canvas_id = $stateParams.canvas_id;
 
-        //DOM对象化
-        let topElement = document.getElementById("topElement");
-
-
         //生成画板
         let drawCanvas = canvas_object.DrawCanvas(document.getElementById("drawCanvas"), $scope);
         drawCanvas.setLocationAndSize(300, 100, 1000, 1000);
@@ -42,12 +38,7 @@ angular.module('myApp.canvas', [])
         });
 
 
-        $scope.log = function () {
-            console.log(drawCanvas.getIdentifiedTrail().getShape().getCenter());
-            drawCanvas.getIdentifiedTrail().getShape().getAngleNumber();
-        };
-
-        $scope.cover = function () {
+        $scope.identity = function () {
             //页面上创建dom
             let cover_dom = document.createElement('div');
             document.getElementById("coverContainer").appendChild(cover_dom);
@@ -82,6 +73,23 @@ angular.module('myApp.canvas', [])
             }, function () {
                 console.error();
             });
+        };
+
+        $scope.saveAndQuit = function () {
+            $http({
+                method: 'get',
+                url: host + 'updateCanvas',
+                params: {
+                    canvas_id: $scope.canvas_id,
+                    trail_record: JSON.stringify(drawCanvas.trailRecord)
+                },
+                headers: {'authorization': 'Bearer ' + $cookies.get('token')}
+            }).then(function (res) {
+
+            }, function () {
+                console.error();
+            });
+            $state.go('home');
         };
 
         $scope.delete = function () {

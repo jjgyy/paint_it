@@ -21,13 +21,15 @@ angular.module('myApp.home', [
             .then(function (res) {
                 $scope.canvasList = res.data;
             }, function () {
+                $cookies.remove('token');
+                $state.go('login');
                 console.error();
             });
 
 
         //ng-repeat执行完毕后, 执行此方法
         $scope.$on('ngRepeatFinished', function() {
-            for (let i=0, len=$scope.canvasList.length; i<len; i++){
+            for (let i=0, len=$scope.canvasList.length; i<len; i++) {
                 let canvas_id = $scope.canvasList[i].canvas_id;
                 let canvas = canvas_object.DrawCanvas(document.getElementById(canvas_id), $scope);
                 canvas.zoom(0.3, 0.15);

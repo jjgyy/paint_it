@@ -48,8 +48,11 @@ angular.module('myApp', [
     })
 
 
-    .controller('MainCtrl', function($scope, $http, $state, $window){
-        $scope.logged = false;
+    .controller('MainCtrl', function($scope, $http, $state, $window, $cookies){
+        $scope.logout = function () {
+            $cookies.remove('token');
+            $state.go('login');
+        };
     })
 
 

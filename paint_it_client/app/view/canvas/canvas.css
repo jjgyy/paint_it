@@ -25,9 +25,11 @@
 
 }
 
-#echartsContainer {
-    position: absolute;
-    display: block;
-    left: 300px;
-    top: 1200px;
+#buttonContainer {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 80%;
 }
+

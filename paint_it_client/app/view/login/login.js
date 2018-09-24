@@ -14,6 +14,10 @@ angular.module('myApp.login', [
 
     .controller('LoginCtrl',function($scope, $route, $http, $state, $cookies) {
 
+        if ($cookies.get('token')) {
+            $state.go('home');
+        }
+
         $scope.login = function () {
             $http({
                 method: 'get',

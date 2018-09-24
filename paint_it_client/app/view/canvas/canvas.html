@@ -7,13 +7,13 @@
 
 </div>
 
-<div id="echartsContainer" style="width: 60%; height: 600px;">
-
+<div id="buttonContainer">
+    <button class="btn btn-primary" ng-click="identity()">识别图形</button>
+    <br>
+    <button class="btn btn-success" ng-click="save()">保存画板</button>
+    <button class="btn btn-success" ng-click="saveAndQuit()">保存并退出</button>
+    <br>
+    <button class="btn btn-danger" ng-click="delete()">删除画板</button>
 </div>
-
-<button ng-click="log()">log</button>
-<button ng-click="cover()">cover</button>
-<button ng-click="save()">save</button>
-<button ng-click="delete()">delete</button>
 
 <link rel="stylesheet" href="view/canvas/canvas.css">
