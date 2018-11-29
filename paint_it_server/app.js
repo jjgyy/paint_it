@@ -1,10 +1,7 @@
 const Koa = require('koa');
 const app = new Koa();
-const views = require('koa-views');
-const co = require('co');
 const convert = require('koa-convert');
 const json = require('koa-json');
-const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger');
 var cors = require('koa2-cors');
@@ -28,9 +25,6 @@ app.use(cors({
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
 }));
 
-app.use(views(__dirname + '/views', {
-  extension: 'jade'
-}));
 
 // app.use(views(__dirname + '/views-ejs', {
 //   extension: 'ejs'

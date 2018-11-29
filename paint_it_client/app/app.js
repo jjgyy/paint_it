@@ -5,18 +5,14 @@
  */
 
 //后端地址
-const host = 'http://118.25.41.139:3000/';
+//const host = 'http://118.25.41.139:3000/';
+const host = 'http://localhost:3000/';
 
 angular.module('myApp', [
     'ngRoute',
     'ui.router',
     'ngCookies',
-
-    'myApp.login',
-    'myApp.register',
-    'myApp.home',
-    'myApp.canvas',
-
+    'oc.lazyLoad',
     'myApp.serviceRouter',
 ])
 
@@ -30,23 +26,43 @@ angular.module('myApp', [
             .state('login', {
                 url: '/login',
                 templateUrl: 'view/login/login.html',
-                controller: 'LoginCtrl'
+                controller: 'LoginCtrl',
+                resolve: {
+                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load('view/login/login.js');
+                    }]
+                }
             })
             .state('register', {
                 url: '/register',
                 templateUrl: 'view/register/register.html',
-                controller: 'RegisterCtrl'
+                controller: 'RegisterCtrl',
+                resolve: {
+                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load('view/register/register.js');
+                    }]
+                }
             })
             .state('home', {
                 url: '/home',
                 templateUrl: 'view/home/home.html',
-                controller: 'HomeCtrl'
+                controller: 'HomeCtrl',
+                resolve: {
+                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load('view/home/home.js');
+                    }]
+                }
             })
             .state('canvas', {
                 params:{"canvas_id": null},
                 url: '/canvas/?:canvas_id',
                 templateUrl: 'view/canvas/canvas.html',
-                controller: 'CanvasCtrl'
+                controller: 'CanvasCtrl',
+                resolve: {
+                    loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load('view/canvas/canvas.js');
+                    }]
+                }
             });
     })
 
