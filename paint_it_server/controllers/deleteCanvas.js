@@ -10,6 +10,10 @@ module.exports = async (ctx) => {
             .where({canvas_id: canvas_id})
             .del();
 
+        await mysql('covers')
+            .where({canvas_id: canvas_id})
+            .del();
+
         await mysql('user_canvas')
             .where({canvas_id: canvas_id})
             .del();

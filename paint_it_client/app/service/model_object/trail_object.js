@@ -1,5 +1,6 @@
 /**
  * @Description:
+ * 逻辑对象轨迹
  * @author Young Gu
  * @date 2018/9/23
  */

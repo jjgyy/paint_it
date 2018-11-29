@@ -23,4 +23,6 @@ router.get('/deleteCanvas', controllers.deleteCanvas);
 
 router.get('/getCanvas', controllers.getCanvas);
 
+router.get('/getCanvasCover', controllers.getCanvasCover);
+
 module.exports = router;

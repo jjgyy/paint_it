@@ -27,3 +27,11 @@ CREATE TABLE `canvases` (
   PRIMARY KEY (`canvas_id`),
   KEY `canvas_id` (`canvas_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `covers`;
+CREATE TABLE `covers` (
+  `canvas_id` int(32) NOT NULL,
+  `cover_record` text COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`canvas_id`),
+  KEY `canvas_id` (`canvas_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

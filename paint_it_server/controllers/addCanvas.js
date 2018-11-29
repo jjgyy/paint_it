@@ -20,6 +20,12 @@ module.exports = async (ctx) => {
                 canvas_id: canvas_id[0]
             });
 
+        await mysql('covers')
+            .insert({
+                canvas_id: canvas_id[0],
+                cover_record: ''
+            });
+
         ctx.body = {
             canvas_id: canvas_id[0]
         }

@@ -1,5 +1,6 @@
 /**
  * @Description:
+ * 页面canvas对象，需要传入dom来创建
  * @author Young Gu
  * @date 2018/9/16
 */
@@ -9,8 +10,6 @@ angular.module('myApp.dom_object.canvas_object', [])
     .service('canvas_object', function(trail_object) {
 
         const service = this;
-
-
 
 
         /**
@@ -69,6 +68,7 @@ angular.module('myApp.dom_object.canvas_object', [])
          * @param dom
          */
         service.NetBackground = function (dom) {
+            //装饰者模式来继承
             let netBackground = service.Canvas(dom);
 
             //生成网格背景
@@ -102,10 +102,12 @@ angular.module('myApp.dom_object.canvas_object', [])
          * @constructor
          */
         service.DrawCanvas = function (dom, rootScope) {
+            //装饰者模式来继承
             let drawCanvas = service.Canvas(dom);
             drawCanvas.lastTrail = [];
             drawCanvas.trailRecord = [];
             drawCanvas.trailRecordNeedingIdentify = [];
+            drawCanvas.coverLog = [];
 
             (() => {
                 rootScope.$drawCanvas = {
@@ -115,38 +117,6 @@ angular.module('myApp.dom_object.canvas_object', [])
                 drawCanvas.scope = rootScope.$drawCanvas;
             })();
 
-            drawCanvas.getIdentifiedTrail = function () {
-                return (this.trailRecordNeedingIdentify !== []) ? trail_object.Trail(this.trailRecordNeedingIdentify) : null;
-            };
-
-            drawCanvas.clearStrokeCount = function () {
-                this.scope.strokeCount = 0;
-            };
-
-            drawCanvas.clearLastTrail = function () {
-                this.lastTrail = [];
-            };
-
-            drawCanvas.clearTrailRecord = function () {
-                this.trailRecord = [];
-            };
-
-            drawCanvas.clearTrailRecordNeedingIdentify = function () {
-                this.trailRecordNeedingIdentify = [];
-            };
-
-            drawCanvas.clearCanvas = function () {
-                //关闭路径，下一次画不会出现清空前内容
-                this.context.closePath();
-                this.context.clearRect(0, 0, this.dom.width, this.dom.height);
-            };
-
-            drawCanvas.clear = function () {
-                this.clearStrokeCount();
-                this.clearTrailRecord();
-                this.clearTrailRecordNeedingIdentify();
-                this.clearCanvas();
-            };
 
             drawCanvas.loadTrailRecord = function (trailRecord) {
                 //将转化的职责交给此方法
@@ -164,6 +134,62 @@ angular.module('myApp.dom_object.canvas_object', [])
                 this.context.stroke();
 
                 this.trailRecord = trailRecord;
+            };
+
+
+            drawCanvas.getIdentifiedTrail = function () {
+                return (this.trailRecordNeedingIdentify !== []) ? trail_object.Trail(this.trailRecordNeedingIdentify) : null;
+            };
+
+
+            drawCanvas.addCoverLog = function (log) {
+                this.coverLog.push(log);
+            };
+
+
+            drawCanvas.loadCoverLog = function (logs) {
+                this.coverLog = logs;
+            };
+
+
+            drawCanvas.clearStrokeCount = function () {
+                this.scope.strokeCount = 0;
+            };
+
+
+            drawCanvas.clearLastTrail = function () {
+                this.lastTrail = [];
+            };
+
+
+            drawCanvas.clearTrailRecord = function () {
+                this.trailRecord = [];
+            };
+
+
+            drawCanvas.clearTrailRecordNeedingIdentify = function () {
+                this.trailRecordNeedingIdentify = [];
+            };
+
+
+            drawCanvas.clearCoverLog = function () {
+                this.coverLog = [];
+            };
+
+
+            drawCanvas.clearCanvas = function () {
+                //关闭路径，下一次画不会出现清空前内容
+                this.context.closePath();
+                this.context.clearRect(0, 0, this.dom.width, this.dom.height);
+            };
+
+
+            drawCanvas.clear = function () {
+                this.clearStrokeCount();
+                this.clearTrailRecord();
+                this.clearTrailRecordNeedingIdentify();
+                this.clearCoverLog();
+                this.clearCanvas();
             };
 
 

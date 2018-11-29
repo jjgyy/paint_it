@@ -4,7 +4,8 @@
  * @date 2018/9/15
  */
 
-const host = 'http://localhost:3000/';
+//后端地址
+const host = 'http://118.25.41.139:3000/';
 
 angular.module('myApp', [
     'ngRoute',
@@ -21,8 +22,10 @@ angular.module('myApp', [
 
 
     .config(function($stateProvider, $urlRouterProvider){
+        //默认路由路径
         $urlRouterProvider.when('', '/login');
 
+        //路由表
         $stateProvider
             .state('login', {
                 url: '/login',
@@ -51,11 +54,13 @@ angular.module('myApp', [
     .controller('MainCtrl', function($scope, $http, $state, $window, $cookies){
         $scope.logout = function () {
             $cookies.remove('token');
+            console.log($cookies.get('token'));
             $state.go('login');
         };
     })
 
 
+    //ng-repeat触发渲染完成事件的标签
     .directive('onFinishRender',['$timeout', '$parse', function ($timeout, $parse) {
         return {
             restrict: 'A',

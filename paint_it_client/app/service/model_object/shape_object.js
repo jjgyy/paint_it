@@ -1,5 +1,6 @@
 /**
  * @Description:
+ * 逻辑对象形状
  * @author Young Gu
  * @date 2018/9/23
  */
@@ -13,39 +14,6 @@ angular.module('myApp.model_object.shape_object', [])
         service.Shape = function (trail) {
             let shape = {};
             shape.trail = trail;
-            shape.name = '形状';
-
-
-
-            shape.getName = function () {
-                let angleNum = this.getAngleNumber(),
-                    width = this.getWidth(),
-                    height = this.getHeight();
-                let WHRatio = width / height;
-                if (angleNum <= 1) {
-                    return '直线';
-                }
-                if (1.5 <= angleNum && angleNum <= 2) {
-                    return '圆形';
-                }
-                if (2.5 <= angleNum && angleNum <= 3) {
-                    return '三角形';
-                }
-                if (3.5 <= angleNum && angleNum <= 4) {
-                    if (WHRatio >= 0.8 && WHRatio <=1.25) {
-                        return '正方形';
-                    } else {
-                        return '长方形';
-                    }
-                }
-                if (4.5 <= angleNum && angleNum <= 5) {
-                    return '五边形';
-                }
-
-                return '多边形';
-
-            };
-
 
 
             shape.getLeftBorder = function () {
@@ -154,6 +122,34 @@ angular.module('myApp.model_object.shape_object', [])
                 return trendChangeCount/2;
             };
 
+
+            shape.getName = function () {
+                let angleNum = this.getAngleNumber(),
+                    width = this.getWidth(),
+                    height = this.getHeight();
+                let WHRatio = width / height;
+                if (angleNum <= 1) {
+                    return '直线';
+                }
+                if (1.5 <= angleNum && angleNum <= 2) {
+                    return '圆形';
+                }
+                if (2.5 <= angleNum && angleNum <= 3) {
+                    return '三角形';
+                }
+                if (3.5 <= angleNum && angleNum <= 4) {
+                    if (WHRatio >= 0.8 && WHRatio <=1.25) {
+                        return '正方形';
+                    } else {
+                        return '长方形';
+                    }
+                }
+                if (4.5 <= angleNum && angleNum <= 5) {
+                    return '五边形';
+                }
+
+                return '多边形';
+            };
 
 
             return shape;
