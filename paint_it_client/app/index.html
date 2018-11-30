@@ -3,62 +3,34 @@
 <head>
     <meta charset="utf-8">
     <title>Paint it!</title>
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css" type="text/css" media="all"/>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="echarts/echarts.common.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<div class="container">
-    <div class="row clearfix">
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button> <a class="navbar-brand">Paint it!</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul ui-sref="home" class="nav navbar-nav">
-                    <li>
-                        <a>首页</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">账户<strong class="caret"></strong></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a>个人中心</a>
-                            </li>
-                            <li class="divider">
-                            </li>
-                            <li ng-click="logout()">
-                                <a>注销</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-    </div>
-</div>
+<nav class="navbar navbar-expand-sm bg-light">
+    <ul class="navbar-nav">
+        <a class="navbar-brand" ui-sref="home">Paint it!</a>
+        <li class="nav-item" ui-sref="home">
+            <a class="nav-link">首页</a>
+        </li>
+        <li class="nav-item" ng-click="logout()">
+            <a class="nav-link">注销</a>
+        </li>
+    </ul>
+</nav>
 
 <ui-view></ui-view>
 
-
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-<script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script src="https://cdn.staticfile.org/angular.js/1.7.5/angular.min.js"></script>
+<script src="https://cdn.staticfile.org/angular.js/1.7.5/angular-route.min.js"></script>
+<script src="https://cdn.staticfile.org/angular-ui-router/1.0.20/angular-ui-router.min.js"></script>
+<script src="https://cdn.staticfile.org/angular.js/1.7.5/angular-cookies.min.js"></script>
+<script src="https://cdn.staticfile.org/oclazyload/1.1.0/ocLazyLoad.min.js"></script>
 <script src="app.js"></script>
 
 <script src="service/service_router.js"></script>
