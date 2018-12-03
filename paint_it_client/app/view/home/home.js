@@ -27,6 +27,13 @@ angular.module('myApp.home', [
             });
 
 
+        $scope.logout = function () {
+            $cookies.remove('token');
+            console.log($cookies.get('token'));
+            $state.go('login');
+        };
+
+
         //ng-repeat执行完毕后, 执行此方法
         $scope.$on('ngRepeatFinished', function() {
             for (let i=0, len=$scope.canvasList.length; i<len; i++) {

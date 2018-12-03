@@ -68,11 +68,7 @@ angular.module('myApp', [
 
 
     .controller('MainCtrl', function($scope, $http, $state, $window, $cookies){
-        $scope.logout = function () {
-            $cookies.remove('token');
-            console.log($cookies.get('token'));
-            $state.go('login');
-        };
+
     })
 
 
