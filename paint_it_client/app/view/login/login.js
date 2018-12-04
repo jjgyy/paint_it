@@ -23,7 +23,7 @@ angular.module('myApp.login', [
                 method: 'get',
                 url: host + 'login',
                 params: {
-                    username: $scope.username,
+                    email: $scope.email,
                     password: $scope.password
                 }
             }).then(function (res) {

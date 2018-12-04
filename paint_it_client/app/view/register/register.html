@@ -15,7 +15,15 @@
                 </div>
                 <div class="form-group column_padding_md">
                     <div class="col-sm-12">
-                        <input ng-model="username" ng-init="username=''" type="text" class="form-control" placeholder="请输入注册用户名..." maxlength="100"/>
+                        <input ng-model="email" ng-init="email=''" type="email" class="form-control" placeholder="请输入注册邮箱..." maxlength="100"/>
+                    </div>
+                </div>
+                <div class="form-group column_padding_md">
+                    <div class="col-sm-12">
+                        <div class="form-inline">
+                            <input ng-model="identifyCode" ng-init="identifyCode=''" type="text" class="form-control" placeholder="请输入验证码..." maxlength="6"/>
+                            <button ng-click="getIdentifyCode()" ng-disabled="email===''" class="btn btn-primary">获取验证码</button>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group column_padding_md">
@@ -25,7 +33,7 @@
                 </div>
                 <div class="form-group column_padding_md">
                     <div class="col-sm-12">
-                        <button ng-click="register()" ng-disabled="(username==='')||(password==='')" type="submit" class="btn btn-primary form-control">注册</button>
+                        <button ng-click="register()" ng-disabled="(email==='')||(password==='')" type="submit" class="btn btn-primary form-control">注册</button>
                     </div>
                 </div>
                 <div class="form-group">

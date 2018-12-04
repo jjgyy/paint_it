@@ -5,8 +5,8 @@
  */
 
 //后端地址
-const host = 'http://118.25.41.139:3000/';
-//const host = 'http://localhost:3000/';
+//const host = 'http://118.25.41.139:3000/';
+const host = 'http://localhost:3000/';
 
 angular.module('myApp', [
     'ngRoute',

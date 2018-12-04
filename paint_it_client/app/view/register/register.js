@@ -13,18 +13,38 @@ angular.module('myApp.register', [
     })
 
     .controller('RegisterCtrl',function($scope, $route, $http, $state) {
+
+        var identifyToken;
+
+        $scope.getIdentifyCode = function () {
+            $http({
+                method: 'get',
+                url: host + 'getIdentifyCode',
+                params: {
+                    email: $scope.email
+                }
+            }).then(function (res) {
+                identifyToken = res.data.token
+            }, function () {
+                console.error();
+            });
+        };
+
         $scope.register = function () {
             $http({
                 method: 'get',
                 url: host + 'addUser',
                 params: {
-                    username: $scope.username,
-                    password: $scope.password
-                }
+                    email: $scope.email,
+                    password: $scope.password,
+                    identifyCode: $scope.identifyCode
+                },
+                headers: {'authorization': 'Bearer ' + identifyToken}
             }).then(function (res) {
                 $state.go('login')
             }, function () {
                 console.error();
             });
         };
+
     });

@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group column_padding_md">
                     <div class="col-sm-12">
-                        <input ng-model="username" ng-init="username=''" type="text" class="form-control" placeholder="请输入用户名..." maxlength="100"/>
+                        <input ng-model="email" ng-init="email=''" type="text" class="form-control" placeholder="请输入邮箱..." maxlength="100"/>
                     </div>
                 </div>
                 <div class="form-group column_padding_md">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group column_padding_md">
                     <div class="col-sm-12">
-                        <button ng-click="login()" ng-disabled="(!username)||(!password)" type="submit" class="btn btn-primary form-control">登录</button>
+                        <button ng-click="login()" ng-disabled="(!email)||(!password)" type="submit" class="btn btn-primary form-control">登录</button>
                     </div>
                 </div>
                 <div class="form-group">
