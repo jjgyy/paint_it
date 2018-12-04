@@ -9,6 +9,8 @@ router.get('/login', controllers.login);
 
 router.post('/uploader', uploader.single('avatar'));
 
+router.get('/getIdentifyCode', controllers.getIdentifyCode);
+
 router.get('/addUser', controllers.addUser);
 
 router.get('/getUserInfo', controllers.getUserInfo);

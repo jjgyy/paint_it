@@ -28,6 +28,7 @@
     "koa-views": "^5.0.1",
     "koa2-cors": "^2.0.6",
     "mysql": "^2.16.0",
+    "nodemailer": "^4.6.8",
     "runkoa": "^1.5.2"
   },
   "devDependencies": {

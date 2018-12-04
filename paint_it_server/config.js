@@ -12,8 +12,15 @@ const CONF = {
         path: [
             /^\/login/,
             /^\/addUser/,
-            /^\/uploader/
+            /^\/getIdentifyCode/
         ]
+    },
+    validate_mailer: {
+        host: 'smtp.126.com',
+        port: 465,
+        user: 'paint_it_validate@126.com',
+        pass: 'paintit16',
+        from: 'paint_it_validate@126.com'
     }
 };
 

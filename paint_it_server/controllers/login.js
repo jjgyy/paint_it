@@ -4,18 +4,18 @@ const config = require('../config');
 
 module.exports = async (ctx) => {
 
-    const username = ctx.query.username,
+    const email = ctx.query.email,
           password = ctx.query.password;
 
     await mysql('users').select('user_id').where({
-        username: username,
+        email: email,
         password: password
     })
         .then(res => {
             if(res[0].user_id) {
                 let userToken = {
                     user_id: res[0].user_id,
-                    username: username
+                    email: email
                 };
                 const token = jwt.sign(userToken, config.token.secret, {expiresIn: '6h'});  //token签名 有效期为6小时
                 ctx.body = {
