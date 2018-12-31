@@ -193,35 +193,39 @@ angular.module('myApp.dom_object.canvas_object', [])
             };
 
 
-            drawCanvas.dom.onmousedown = function () {
+            drawCanvas.dom.onmousedown = function (e) {
+                let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop,
+                    scrollLeft = document.documentElement.scrollLeft || window.pageXOffset || document.body.scrollLeft;
                 drawCanvas.scope.isDrawing = true;
                 drawCanvas.context.beginPath();
                 drawCanvas.context.moveTo(
-                    window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
-                    window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
+                    e.clientX + scrollLeft - drawCanvas.dom.offsetLeft,
+                    e.clientY + scrollTop - drawCanvas.dom.offsetTop
                 );
                 //最后一笔的轨迹清空
                 drawCanvas.lastTrail = [];
                 drawCanvas.lastTrail.push({
-                    x: window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
-                    y: window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
+                    x: e.clientX + scrollLeft - drawCanvas.dom.offsetLeft,
+                    y: e.clientY + scrollTop - drawCanvas.dom.offsetTop
                 });
             };
 
-            drawCanvas.dom.onmousemove = function () {
+            drawCanvas.dom.onmousemove = function (e) {
+                let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop,
+                    scrollLeft = document.documentElement.scrollLeft || window.pageXOffset || document.body.scrollLeft;
                 if(!drawCanvas.scope.isDrawing) { return; }
                 drawCanvas.context.stroke();
                 drawCanvas.context.lineTo(
-                    window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
-                    window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
+                    e.clientX + scrollLeft - drawCanvas.dom.offsetLeft,
+                    e.clientY + scrollTop - drawCanvas.dom.offsetTop
                 );
                 drawCanvas.lastTrail.push({
-                    x: window.event.clientX + document.documentElement.scrollLeft - drawCanvas.dom.offsetLeft,
-                    y: window.event.clientY + document.documentElement.scrollTop - drawCanvas.dom.offsetTop
+                    x: e.clientX + scrollLeft - drawCanvas.dom.offsetLeft,
+                    y: e.clientY + scrollTop - drawCanvas.dom.offsetTop
                 });
             };
 
-            drawCanvas.dom.onmouseup = function () {
+            drawCanvas.dom.onmouseup = function (e) {
                 drawCanvas.scope.isDrawing = false;
                 drawCanvas.context.stroke();
                 //笔画数+1
