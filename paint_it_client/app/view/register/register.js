@@ -30,6 +30,7 @@ angular.module('myApp.register', [
             });
         };
 
+
         $scope.register = function () {
             $http({
                 method: 'get',
@@ -41,8 +42,12 @@ angular.module('myApp.register', [
                 },
                 headers: {'authorization': 'Bearer ' + identifyToken}
             }).then(function (res) {
-                $state.go('login')
+                $scope.success_info = '注册成功，即将跳转';
+                setTimeout( function () {
+                    $state.go('login')
+                }, 1000)
             }, function () {
+                $scope.success_info = '注册失败，请重新注册';
                 console.error();
             });
         };

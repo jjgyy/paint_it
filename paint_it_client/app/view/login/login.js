@@ -31,9 +31,10 @@ angular.module('myApp.login', [
                     $cookies.put('token', res.data.token);
                     $state.go('home');
                 } else {
-                    console.log(res);
+                    $scope.warning_info = '用户名或密码错误';
                 }
             }, function () {
+                $scope.warning_info = '用户名或密码错误';
                 console.error();
             });
         };

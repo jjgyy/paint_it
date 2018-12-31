@@ -38,3 +38,14 @@ a{
 .white_smoke{
     background: whitesmoke;
 }
+
+
+.warning_info{
+    color: red;
+    font-size: medium;
+}
+
+.success_info{
+    color: green;
+    font-size: medium;
+}
